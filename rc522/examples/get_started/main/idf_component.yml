@@ -1,0 +1,3 @@
+dependencies:
+  rc522:
+    override_path: "../../../"

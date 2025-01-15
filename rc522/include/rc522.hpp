@@ -18,6 +18,8 @@
 #include "esp_err.h"
 #include "esp_log.h"
 
+static const int kDefaultSpiClockSpeedHz = 1000000;
+
 class RC522 {
    public:
     enum Gain {
@@ -45,7 +47,8 @@ class RC522 {
                                 int miso_pin,
                                 int mosi_pin,
                                 int sck_pin,
-                                spi_device_handle_t* spi_handle);
+                                spi_device_handle_t* spi_handle,
+                                int spi_clock_speed_hz = kDefaultSpiClockSpeedHz);
 
     RC522(int ss_pin, int reset_pin, int irq_pin, spi_device_handle_t spi_handle);
     virtual ~RC522() = default;

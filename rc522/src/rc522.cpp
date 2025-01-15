@@ -112,7 +112,8 @@ esp_err_t RC522::InitSpiBus(spi_host_device_t host_device,
                             int miso_pin,
                             int mosi_pin,
                             int sck_pin,
-                            spi_device_handle_t* spi_handle) {
+                            spi_device_handle_t* spi_handle,
+                            int spi_clock_speed_hz) {
     spi_bus_config_t buscfg = {};
     buscfg.miso_io_num = miso_pin;
     buscfg.mosi_io_num = mosi_pin;
@@ -131,7 +132,7 @@ esp_err_t RC522::InitSpiBus(spi_host_device_t host_device,
     dev_config.address_bits = 0;
     dev_config.dummy_bits = 0;
     dev_config.mode = 0;
-    dev_config.clock_speed_hz = 1000000;  // 1MHz
+    dev_config.clock_speed_hz = spi_clock_speed_hz;  // 1MHz
     dev_config.queue_size = 2;
 
     err = spi_bus_add_device(host_device, &dev_config, spi_handle);

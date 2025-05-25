@@ -36,11 +36,8 @@ void app_main(void);
 
 void app_main(void) {
     ESP_LOGI(kTag, "Starting rc522 test");
-
-    spi_device_handle_t spi_handle;
-    RC522::InitSpiBus(SPI2_HOST, kMISOPin, kMOSIPin, kSCKPin, &spi_handle);
-
-    RC522 rc522(kSsPin, kResetPin, -1, spi_handle);
+    RC522::InitSpiBus(SPI2_HOST, kMISOPin, kMOSIPin, kSCKPin);
+    RC522 rc522(SPI2_HOST, kSsPin, kResetPin, -1);
     rc522.LogVersion();
 
     while (true) {

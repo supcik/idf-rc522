@@ -14,23 +14,23 @@
 
 #pragma once
 
+#define RC522V2
+
 #include "driver/spi_master.h"
 #include "esp_err.h"
 #include "esp_log.h"
-
-static const int kDefaultSpiClockSpeedHz = 1000000;
 
 class RC522 {
    public:
     enum Gain {
         gain180dB = 0x00,
         gain230dB = 0x01,
-        gain18dB = 0x02,
-        gain23dB = 0x03,
-        gain33dB = 0x04,
-        gain38dB = 0x05,
-        gain43dB = 0x06,
-        gain48dB = 0x07,
+        gain18dB  = 0x02,
+        gain23dB  = 0x03,
+        gain33dB  = 0x04,
+        gain38dB  = 0x05,
+        gain43dB  = 0x06,
+        gain48dB  = 0x07,
     };
 
     enum Reason {
@@ -46,20 +46,19 @@ class RC522 {
     static esp_err_t InitSpiBus(spi_host_device_t host_device,
                                 int miso_pin,
                                 int mosi_pin,
-                                int sck_pin,
-                                spi_device_handle_t* spi_handle,
-                                int spi_clock_speed_hz = kDefaultSpiClockSpeedHz);
+                                int sck_pin);
 
-    RC522(int ss_pin, int reset_pin, int irq_pin, spi_device_handle_t spi_handle);
+    RC522(spi_host_device_t host_device, int ss_pin, int reset_pin, int irq_pin);
     virtual ~RC522() = default;
 
-    void HardReset();
-    void SoftReset();
+    esp_err_t Init();
+    esp_err_t HardReset();
+    esp_err_t SoftReset();
 
-    void AntennaOn();
-    void AntennaOff();
+    esp_err_t AntennaOn();
+    esp_err_t AntennaOff();
 
-    uint8_t GetAntennaGain();
+    esp_err_t GetAntennaGain(uint8_t* gain);
     esp_err_t SetAntennaGain(uint8_t gain);
 
     void LogVersion();
@@ -80,17 +79,18 @@ class RC522 {
     int reset_pin_;
     int irq_pin_;
     spi_device_handle_t spi_handle_;
+    int acquire_count_ = 0;
 
-    void Enable();
-    void Disable();
+    esp_err_t AcquireBus();
+    void ReleaseBus();
 
-    void WriteReg(uint8_t reg, uint8_t value);
-    void WriteRegs(uint8_t reg, uint8_t* values, size_t len);
-    uint8_t ReadReg(uint8_t reg);
-    void ReadRegs(uint8_t reg, uint8_t* values, size_t len);
+    esp_err_t WriteReg(uint8_t reg, uint8_t value);
+    esp_err_t WriteRegs(uint8_t reg, uint8_t* values, size_t len);
+    esp_err_t ReadReg(uint8_t reg, uint8_t* value);
+    esp_err_t ReadRegs(uint8_t reg, uint8_t* values, size_t len);
 
-    void ClearRegBits(uint8_t reg, uint8_t bits, bool always = false);
-    void SetRegBits(uint8_t reg, uint8_t bits, bool always = false);
+    esp_err_t ClearRegBits(uint8_t reg, uint8_t bits, bool always = false);
+    esp_err_t SetRegBits(uint8_t reg, uint8_t bits, bool always = false);
 
     esp_err_t CalculateCRC(uint8_t* data, size_t len, uint16_t* result);
 
@@ -98,19 +98,19 @@ class RC522 {
                           uint8_t wait_irq,
                           uint8_t* tx_data,
                           size_t tx_len,
-                          uint8_t* rx_data = nullptr,
-                          size_t* rx_len = nullptr,
+                          uint8_t* rx_data    = nullptr,
+                          size_t* rx_len      = nullptr,
                           uint8_t* valid_bits = nullptr,
-                          uint8_t rx_align = 0,
-                          bool check_crc = false);
+                          uint8_t rx_align    = 0,
+                          bool check_crc      = false);
 
     esp_err_t TransceiveData(uint8_t* tx_data,
                              size_t tx_len,
-                             uint8_t* rx_data = nullptr,
-                             size_t* rx_len = nullptr,
+                             uint8_t* rx_data    = nullptr,
+                             size_t* rx_len      = nullptr,
                              uint8_t* valid_bits = nullptr,
-                             uint8_t rx_align = 0,
-                             bool check_crc = false);
+                             uint8_t rx_align    = 0,
+                             bool check_crc      = false);
     esp_err_t AnticollisionLoop(uint8_t cascade_level, uint32_t* uid);
     esp_err_t PiccSendShortFrame(uint8_t command);
 };

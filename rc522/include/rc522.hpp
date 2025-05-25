@@ -25,12 +25,12 @@ class RC522 {
     enum Gain {
         gain180dB = 0x00,
         gain230dB = 0x01,
-        gain18dB  = 0x02,
-        gain23dB  = 0x03,
-        gain33dB  = 0x04,
-        gain38dB  = 0x05,
-        gain43dB  = 0x06,
-        gain48dB  = 0x07,
+        gain18dB = 0x02,
+        gain23dB = 0x03,
+        gain33dB = 0x04,
+        gain38dB = 0x05,
+        gain43dB = 0x06,
+        gain48dB = 0x07,
     };
 
     enum Reason {
@@ -98,19 +98,19 @@ class RC522 {
                           uint8_t wait_irq,
                           uint8_t* tx_data,
                           size_t tx_len,
-                          uint8_t* rx_data    = nullptr,
-                          size_t* rx_len      = nullptr,
+                          uint8_t* rx_data = nullptr,
+                          size_t* rx_len = nullptr,
                           uint8_t* valid_bits = nullptr,
-                          uint8_t rx_align    = 0,
-                          bool check_crc      = false);
+                          uint8_t rx_align = 0,
+                          bool check_crc = false);
 
     esp_err_t TransceiveData(uint8_t* tx_data,
                              size_t tx_len,
-                             uint8_t* rx_data    = nullptr,
-                             size_t* rx_len      = nullptr,
+                             uint8_t* rx_data = nullptr,
+                             size_t* rx_len = nullptr,
                              uint8_t* valid_bits = nullptr,
-                             uint8_t rx_align    = 0,
-                             bool check_crc      = false);
+                             uint8_t rx_align = 0,
+                             bool check_crc = false);
     esp_err_t AnticollisionLoop(uint8_t cascade_level, uint32_t* uid);
     esp_err_t PiccSendShortFrame(uint8_t command);
 };

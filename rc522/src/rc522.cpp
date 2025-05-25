@@ -25,104 +25,104 @@
 
 static const char* kTag = "RC522";
 
-static int kCrcTimeOutMs               = 100;
-static int kComTimeOutMs               = 100;
-static int kMaxAnticollisionIter       = 100;
+static int kCrcTimeOutMs = 100;
+static int kComTimeOutMs = 100;
+static int kMaxAnticollisionIter = 100;
 static int kMultipleRegisterBufferSize = 32;
 
 static const int kSpiClockSpeedHz = 1000000;
 
-static constexpr uint8_t kCommandReg      = 0x01;
-static constexpr uint8_t kComlEnReg       = 0x02;
-static constexpr uint8_t kDivlEnReg       = 0x03;
-static constexpr uint8_t kComIrqReg       = 0x04;
-static constexpr uint8_t kDivIrqReg       = 0x05;
-static constexpr uint8_t kErrorReg        = 0x06;
-static constexpr uint8_t kStatus1Reg      = 0x07;
-static constexpr uint8_t kStatus2Reg      = 0x08;
-static constexpr uint8_t kFifoDataReg     = 0x09;
-static constexpr uint8_t kFifoLevelReg    = 0x0A;
-static constexpr uint8_t kWaterLevelReg   = 0x0B;
-static constexpr uint8_t kControlReg      = 0x0C;
-static constexpr uint8_t kBitFramingReg   = 0x0D;
-static constexpr uint8_t kCollReg         = 0x0E;
-static constexpr uint8_t kModeReg         = 0x11;
-static constexpr uint8_t kTxModeReg       = 0x12;
-static constexpr uint8_t kRxModeReg       = 0x13;
-static constexpr uint8_t kTxControlReg    = 0x14;
-static constexpr uint8_t kTxAskReg        = 0x15;
-static constexpr uint8_t kTxSelReg        = 0x16;
-static constexpr uint8_t kRxSelReg        = 0x17;
-static constexpr uint8_t kRxThresholdReg  = 0x18;
-static constexpr uint8_t kDemodReg        = 0x19;
-static constexpr uint8_t kMfTxReg         = 0x1C;
-static constexpr uint8_t kMfRxReg         = 0x1D;
-static constexpr uint8_t kSerialSpeedReg  = 0x1F;
-static constexpr uint8_t kCrcResultReg    = 0x21;
-static constexpr uint8_t kCrcResultRegH   = 0x21;
-static constexpr uint8_t kCrcResultRegL   = 0x22;
-static constexpr uint8_t kModWidthReg     = 0x24;
-static constexpr uint8_t kRfCfgReg        = 0x26;
-static constexpr uint8_t kGsNReg          = 0x27;
-static constexpr uint8_t kCwGsPReg        = 0x28;
-static constexpr uint8_t kModGsPReg       = 0x29;
-static constexpr uint8_t kTModeReg        = 0x2A;
-static constexpr uint8_t kTPrescalerReg   = 0x2B;
-static constexpr uint8_t kTReloadRegH     = 0x2C;
-static constexpr uint8_t kTReloadRegL     = 0x2D;
-static constexpr uint8_t kTCounterValReg  = 0x2E;
-static constexpr uint8_t kTestSel1Reg     = 0x31;
-static constexpr uint8_t kTestSel2Reg     = 0x32;
-static constexpr uint8_t kTestPinEnReg    = 0x33;
+static constexpr uint8_t kCommandReg = 0x01;
+static constexpr uint8_t kComlEnReg = 0x02;
+static constexpr uint8_t kDivlEnReg = 0x03;
+static constexpr uint8_t kComIrqReg = 0x04;
+static constexpr uint8_t kDivIrqReg = 0x05;
+static constexpr uint8_t kErrorReg = 0x06;
+static constexpr uint8_t kStatus1Reg = 0x07;
+static constexpr uint8_t kStatus2Reg = 0x08;
+static constexpr uint8_t kFifoDataReg = 0x09;
+static constexpr uint8_t kFifoLevelReg = 0x0A;
+static constexpr uint8_t kWaterLevelReg = 0x0B;
+static constexpr uint8_t kControlReg = 0x0C;
+static constexpr uint8_t kBitFramingReg = 0x0D;
+static constexpr uint8_t kCollReg = 0x0E;
+static constexpr uint8_t kModeReg = 0x11;
+static constexpr uint8_t kTxModeReg = 0x12;
+static constexpr uint8_t kRxModeReg = 0x13;
+static constexpr uint8_t kTxControlReg = 0x14;
+static constexpr uint8_t kTxAskReg = 0x15;
+static constexpr uint8_t kTxSelReg = 0x16;
+static constexpr uint8_t kRxSelReg = 0x17;
+static constexpr uint8_t kRxThresholdReg = 0x18;
+static constexpr uint8_t kDemodReg = 0x19;
+static constexpr uint8_t kMfTxReg = 0x1C;
+static constexpr uint8_t kMfRxReg = 0x1D;
+static constexpr uint8_t kSerialSpeedReg = 0x1F;
+static constexpr uint8_t kCrcResultReg = 0x21;
+static constexpr uint8_t kCrcResultRegH = 0x21;
+static constexpr uint8_t kCrcResultRegL = 0x22;
+static constexpr uint8_t kModWidthReg = 0x24;
+static constexpr uint8_t kRfCfgReg = 0x26;
+static constexpr uint8_t kGsNReg = 0x27;
+static constexpr uint8_t kCwGsPReg = 0x28;
+static constexpr uint8_t kModGsPReg = 0x29;
+static constexpr uint8_t kTModeReg = 0x2A;
+static constexpr uint8_t kTPrescalerReg = 0x2B;
+static constexpr uint8_t kTReloadRegH = 0x2C;
+static constexpr uint8_t kTReloadRegL = 0x2D;
+static constexpr uint8_t kTCounterValReg = 0x2E;
+static constexpr uint8_t kTestSel1Reg = 0x31;
+static constexpr uint8_t kTestSel2Reg = 0x32;
+static constexpr uint8_t kTestPinEnReg = 0x33;
 static constexpr uint8_t kTestPinValueReg = 0x34;
-static constexpr uint8_t kTestBusReg      = 0x35;
-static constexpr uint8_t kAutoTestReg     = 0x36;
-static constexpr uint8_t kVersionReg      = 0x37;
-static constexpr uint8_t kAnalogTestReg   = 0x38;
-static constexpr uint8_t kTestDac1Reg     = 0x39;
-static constexpr uint8_t kTestDac2Reg     = 0x3A;
-static constexpr uint8_t kTestAdcReg      = 0x3B;
+static constexpr uint8_t kTestBusReg = 0x35;
+static constexpr uint8_t kAutoTestReg = 0x36;
+static constexpr uint8_t kVersionReg = 0x37;
+static constexpr uint8_t kAnalogTestReg = 0x38;
+static constexpr uint8_t kTestDac1Reg = 0x39;
+static constexpr uint8_t kTestDac2Reg = 0x3A;
+static constexpr uint8_t kTestAdcReg = 0x3B;
 
-static constexpr uint8_t kIdleCmd             = 0x00;
-static constexpr uint8_t kMemCmd              = 0x01;
+static constexpr uint8_t kIdleCmd = 0x00;
+static constexpr uint8_t kMemCmd = 0x01;
 static constexpr uint8_t kGenerateRandomIdCmd = 0x02;
-static constexpr uint8_t kCalcCrcCmd          = 0x03;
-static constexpr uint8_t kTransmitCmd         = 0x04;
-static constexpr uint8_t kNoCmdChangeCmd      = 0x05;
-static constexpr uint8_t kReceiveCmd          = 0x08;
-static constexpr uint8_t kTransceiveCmd       = 0x0C;
-static constexpr uint8_t kMfAuthentCmd        = 0x0E;
-static constexpr uint8_t kSoftResetCmd        = 0x0F;
+static constexpr uint8_t kCalcCrcCmd = 0x03;
+static constexpr uint8_t kTransmitCmd = 0x04;
+static constexpr uint8_t kNoCmdChangeCmd = 0x05;
+static constexpr uint8_t kReceiveCmd = 0x08;
+static constexpr uint8_t kTransceiveCmd = 0x0C;
+static constexpr uint8_t kMfAuthentCmd = 0x0E;
+static constexpr uint8_t kSoftResetCmd = 0x0F;
 
-static constexpr uint8_t kPiccCmdReqA        = 0x26;
-static constexpr uint8_t kPiccCmdWupA        = 0x52;
-static constexpr uint8_t kPiccCmdCt          = 0x88;
-static constexpr uint8_t kPiccCmdSelCl1      = 0x93;
-static constexpr uint8_t kPiccCmdSelCl2      = 0x95;
-static constexpr uint8_t kPiccCmdSelCl3      = 0x97;
-static constexpr uint8_t kPiccCmdHltA        = 0x50;
-static constexpr uint8_t kPiccCmdRats        = 0xE0;
-static constexpr uint8_t kPiccCmdMfAuthKeyA  = 0x60;
-static constexpr uint8_t kPiccCmdMfAuthKeyB  = 0x61;
-static constexpr uint8_t kPiccCmdMfRead      = 0x30;
-static constexpr uint8_t kPiccCmdMfWrite     = 0xA0;
+static constexpr uint8_t kPiccCmdReqA = 0x26;
+static constexpr uint8_t kPiccCmdWupA = 0x52;
+static constexpr uint8_t kPiccCmdCt = 0x88;
+static constexpr uint8_t kPiccCmdSelCl1 = 0x93;
+static constexpr uint8_t kPiccCmdSelCl2 = 0x95;
+static constexpr uint8_t kPiccCmdSelCl3 = 0x97;
+static constexpr uint8_t kPiccCmdHltA = 0x50;
+static constexpr uint8_t kPiccCmdRats = 0xE0;
+static constexpr uint8_t kPiccCmdMfAuthKeyA = 0x60;
+static constexpr uint8_t kPiccCmdMfAuthKeyB = 0x61;
+static constexpr uint8_t kPiccCmdMfRead = 0x30;
+static constexpr uint8_t kPiccCmdMfWrite = 0xA0;
 static constexpr uint8_t kPiccCmdMfDecrement = 0xC0;
 static constexpr uint8_t kPiccCmdMfIncrement = 0xC1;
-static constexpr uint8_t kPiccCmdMfRestore   = 0xC2;
-static constexpr uint8_t kPiccCmdMfTransfer  = 0xB0;
-static constexpr uint8_t kPiccCmdUlWrite     = 0xA2;
+static constexpr uint8_t kPiccCmdMfRestore = 0xC2;
+static constexpr uint8_t kPiccCmdMfTransfer = 0xB0;
+static constexpr uint8_t kPiccCmdUlWrite = 0xA2;
 
 esp_err_t RC522::InitSpiBus(spi_host_device_t host_device,
                             int miso_pin,
                             int mosi_pin,
                             int sck_pin) {
     spi_bus_config_t buscfg = {};
-    buscfg.miso_io_num      = miso_pin;
-    buscfg.mosi_io_num      = mosi_pin;
-    buscfg.sclk_io_num      = sck_pin;
-    buscfg.quadwp_io_num    = -1;
-    buscfg.quadhd_io_num    = -1;
-    buscfg.max_transfer_sz  = 32;
+    buscfg.miso_io_num = miso_pin;
+    buscfg.mosi_io_num = mosi_pin;
+    buscfg.sclk_io_num = sck_pin;
+    buscfg.quadwp_io_num = -1;
+    buscfg.quadhd_io_num = -1;
+    buscfg.max_transfer_sz = 32;
     return (spi_bus_initialize(host_device, &buscfg, SPI_DMA_CH_AUTO));
 }
 
@@ -134,34 +134,34 @@ RC522::RC522(spi_host_device_t host_device, int ss_pin, int reset_pin, int irq_p
     }
 
     gpio_config_t io_conf = {};
-    io_conf.intr_type     = GPIO_INTR_DISABLE;
-    io_conf.pull_down_en  = GPIO_PULLDOWN_DISABLE;
-    io_conf.pull_up_en    = GPIO_PULLUP_DISABLE;
+    io_conf.intr_type = GPIO_INTR_DISABLE;
+    io_conf.pull_down_en = GPIO_PULLDOWN_DISABLE;
+    io_conf.pull_up_en = GPIO_PULLUP_DISABLE;
 
     if (reset_pin >= 0) {
         // Configure rst pin as output
-        io_conf.mode         = GPIO_MODE_OUTPUT;
+        io_conf.mode = GPIO_MODE_OUTPUT;
         io_conf.pin_bit_mask = (1ULL << reset_pin_);
         ESP_ERROR_CHECK(gpio_config(&io_conf));
     }
 
     if (irq_pin_ >= 0) {
         // Configure irq pin as input
-        io_conf.mode         = GPIO_MODE_INPUT;
+        io_conf.mode = GPIO_MODE_INPUT;
         io_conf.pin_bit_mask = (1ULL << irq_pin_);
         ESP_ERROR_CHECK(gpio_config(&io_conf));
     }
 
     spi_device_interface_config_t dev_config = {};
-    dev_config.command_bits                  = 0;
-    dev_config.address_bits                  = 0;
-    dev_config.dummy_bits                    = 0;
-    dev_config.mode                          = 0;
-    dev_config.clock_speed_hz                = kSpiClockSpeedHz;
-    dev_config.queue_size                    = 2;
-    dev_config.spics_io_num                  = ss_pin;
-    dev_config.cs_ena_posttrans              = 1;
-    dev_config.cs_ena_pretrans               = 1;
+    dev_config.command_bits = 0;
+    dev_config.address_bits = 0;
+    dev_config.dummy_bits = 0;
+    dev_config.mode = 0;
+    dev_config.clock_speed_hz = kSpiClockSpeedHz;
+    dev_config.queue_size = 2;
+    dev_config.spics_io_num = ss_pin;
+    dev_config.cs_ena_posttrans = 1;
+    dev_config.cs_ena_pretrans = 1;
 
     ESP_ERROR_CHECK(spi_bus_add_device(host_device, &dev_config, &spi_handle_));
     ESP_LOGI(kTag, "SPI device added OK");
@@ -193,21 +193,21 @@ void RC522::ReleaseBus() {
 esp_err_t RC522::WriteReg(uint8_t reg, uint8_t value) {
     assert(acquire_count_ > 0);
     spi_transaction_t transaction = {};
-    uint8_t tx_buffer[2]          = {static_cast<uint8_t>(reg << 1), value};
-    transaction.length            = 16;
-    transaction.tx_buffer         = tx_buffer;
-    transaction.rx_buffer         = NULL;
+    uint8_t tx_buffer[2] = {static_cast<uint8_t>(reg << 1), value};
+    transaction.length = 16;
+    transaction.tx_buffer = tx_buffer;
+    transaction.rx_buffer = NULL;
     return spi_device_transmit(spi_handle_, &transaction);
 }
 
 esp_err_t RC522::WriteRegs(uint8_t reg, uint8_t* values, size_t len) {
     assert(acquire_count_ > 0);
     assert(len < kMultipleRegisterBufferSize);
-    spi_transaction_t transaction                  = {};
+    spi_transaction_t transaction = {};
     uint8_t tx_buffer[kMultipleRegisterBufferSize] = {0};
-    tx_buffer[0]                                   = static_cast<uint8_t>(reg << 1);
+    tx_buffer[0] = static_cast<uint8_t>(reg << 1);
     memcpy(tx_buffer + 1, values, len);
-    transaction.length    = 8 * (len + 1);
+    transaction.length = 8 * (len + 1);
     transaction.tx_buffer = &tx_buffer;
     transaction.rx_buffer = NULL;
     return spi_device_transmit(spi_handle_, &transaction);
@@ -220,7 +220,7 @@ esp_err_t RC522::ReadReg(uint8_t reg, uint8_t* value) {
     uint8_t tx_buffer[2] = {static_cast<uint8_t>(0x80 | (reg << 1)), 0x00};
     uint8_t rx_buffer[2] = {0};
 
-    transaction.length    = 16;
+    transaction.length = 16;
     transaction.tx_buffer = tx_buffer;
     transaction.rx_buffer = rx_buffer;
 
@@ -241,11 +241,11 @@ esp_err_t RC522::ReadRegs(uint8_t reg, uint8_t* values, size_t len) {
     for (int i = 0; i < len; i++) {
         tx_buffer[i] = static_cast<uint8_t>(0x80 | (reg << 1));
     }
-    tx_buffer[len]        = 0x80;
-    transaction.length    = 8 * (len + 1);
+    tx_buffer[len] = 0x80;
+    transaction.length = 8 * (len + 1);
     transaction.tx_buffer = &tx_buffer;
     transaction.rx_buffer = &rx_buffer;
-    esp_err_t err         = spi_device_transmit(spi_handle_, &transaction);
+    esp_err_t err = spi_device_transmit(spi_handle_, &transaction);
     if (err != ESP_OK) return err;
     memcpy(values, rx_buffer + 1, len);
     return ESP_OK;
@@ -334,7 +334,7 @@ esp_err_t RC522::SetAntennaGain(uint8_t gain) {
     }
     if (((value >> 4) & 0x07) != gain) {
         value = (value & ~0x70) | (gain << 4);
-        err   = WriteReg(kRfCfgReg, value);
+        err = WriteReg(kRfCfgReg, value);
     }
     ReleaseBus();
     return err;
@@ -418,9 +418,9 @@ esp_err_t RC522::Communicate(uint8_t cmd,
                              uint8_t rx_align,
                              bool check_crc) {
     assert(acquire_count_ > 0);
-    reason_              = kOk;
+    reason_ = kOk;
     uint8_t tx_last_bits = tx_last_bits_ptr ? *tx_last_bits_ptr : 0;
-    uint8_t bit_framing  = ((rx_align & 0x7) << 4) | (tx_last_bits & 0x7);
+    uint8_t bit_framing = ((rx_align & 0x7) << 4) | (tx_last_bits & 0x7);
 
     ESP_LOGD(kTag,
              "Communicate: cmd=0x%02X, wait_irq=0x%02X, tx_len=%d, rx_len=%d, bit_framing=0x%02X",
@@ -449,7 +449,7 @@ esp_err_t RC522::Communicate(uint8_t cmd,
     }
 
     int64_t deadline = esp_timer_get_time() / 1000 + kComTimeOutMs;
-    bool completed   = false;
+    bool completed = false;
 
     do {
         uint8_t irq;
@@ -490,7 +490,7 @@ esp_err_t RC522::Communicate(uint8_t cmd,
             return ESP_ERR_INVALID_ARG;
         }
         *rx_len = fifo_level;
-        err     = ReadRegs(kFifoDataReg, rx_data, *rx_len);
+        err = ReadRegs(kFifoDataReg, rx_data, *rx_len);
         if (err != ESP_OK) return err;
         ReadReg(kControlReg, &vb);
         vb &= 0x07;
@@ -539,7 +539,7 @@ esp_err_t RC522::PiccSendShortFrame(uint8_t command) {
     assert(acquire_count_ > 0);
     uint8_t tx_buffer[] = {command};
     uint8_t rx_buffer[2];
-    size_t rx_size     = sizeof(rx_buffer);
+    size_t rx_size = sizeof(rx_buffer);
     uint8_t valid_bits = 7;
     return TransceiveData(tx_buffer, sizeof(tx_buffer), rx_buffer, &rx_size, &valid_bits);
 }
@@ -547,14 +547,14 @@ esp_err_t RC522::PiccSendShortFrame(uint8_t command) {
 esp_err_t RC522::AnticollisionLoop(uint8_t cascade_level, uint32_t* uid) {
     assert(acquire_count_ > 0);
     uint8_t uid_valid_bits = 0;
-    uint8_t buffer[9]      = {0};
+    uint8_t buffer[9] = {0};
     for (int count = 0; count < kMaxAnticollisionIter; count++) {
         uint8_t* rx_buffer = nullptr;
-        size_t rx_len      = 0;
-        size_t tx_len      = 0;
+        size_t rx_len = 0;
+        size_t tx_len = 0;
 
         uint8_t byte_count = (2 + (uid_valid_bits / 8)) & 0x07;
-        uint8_t bit_count  = uid_valid_bits & 0x07;
+        uint8_t bit_count = uid_valid_bits & 0x07;
 
         buffer[0] = cascade_level;
         if (uid_valid_bits >= 32) {  // SELECT
@@ -566,18 +566,18 @@ esp_err_t RC522::AnticollisionLoop(uint8_t cascade_level, uint32_t* uid) {
 
             buffer[7] = crc & 0xFF;  // LSB
             buffer[8] = crc >> 8;    // MSB
-            tx_len    = 9;
+            tx_len = 9;
             rx_buffer = buffer + 6;
-            rx_len    = 3;
+            rx_len = 3;
         } else {  // ANTICOLLISION
             // byte_count also contains 2 additional bytes, namely SEL and NVB
             buffer[1] = (byte_count << 4) | (bit_count);
-            tx_len    = byte_count + ((bit_count > 0) ? 1 : 0);
+            tx_len = byte_count + ((bit_count > 0) ? 1 : 0);
             rx_buffer = buffer + byte_count;
-            rx_len    = sizeof(buffer) - byte_count;
+            rx_len = sizeof(buffer) - byte_count;
         }
 
-        uint8_t rx_align     = bit_count;
+        uint8_t rx_align = bit_count;
         uint8_t tx_last_bits = (8 - bit_count) & 0xf;
 
         esp_err_t err = TransceiveData(buffer, tx_len, rx_buffer, &rx_len, &tx_last_bits, rx_align);
